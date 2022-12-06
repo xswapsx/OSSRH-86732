@@ -1,13 +1,16 @@
 package com.swapy.mycamerax
 
 import android.app.Activity
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.swapy.mycamerax.Utils.IMAGE_PATH
+import com.swapy.mycamerax.Utils.deleteTheFile
 import com.swapy.mycamerax.Utils.toast
+import com.swapy.mycamerax.Watermark.addWatermark
 import com.swapy.mycamerax.databinding.ActivityMainBinding
-import java.io.File
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -25,21 +28,20 @@ class MainActivity : AppCompatActivity() {
     private val openCameraActivity =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                // Do something here
+                filePath = result.data?.getStringExtra(IMAGE_PATH).toString()
                 toast("Path: ${result.data?.getStringExtra(IMAGE_PATH)}")
+
+                val bitmap = BitmapFactory.decodeFile(filePath)
+                val options = Watermark.WatermarkOptions()
+                val newBitmap = addWatermark(bitmap, "@Swapnil", options)
+                binding.imgView.setImageBitmap(newBitmap)
+                deleteTheFile(filePath)
             }
 
-//            deleteTheFile(result.data?.getStringExtra(IMAGE_PATH).toString())
         }
 
-    private fun deleteTheFile(path: String) {
-        val fDelete = File(path)
-        if (fDelete.exists()) {
-            if (fDelete.delete())
-                toast("file deleted: $path")
-            else
-                toast("file is not deleted!")
-        }
+    companion object {
+        private var filePath = ""
     }
 
 }
