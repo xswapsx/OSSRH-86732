@@ -4,6 +4,7 @@ import android.graphics.*
 import android.graphics.Paint.ANTI_ALIAS_FLAG
 import android.graphics.Paint.DITHER_FLAG
 import androidx.annotation.ColorInt
+import androidx.core.content.res.ResourcesCompat
 
 object Watermark {
 
@@ -96,7 +97,10 @@ object Watermark {
         val paddingToWidthRatio: Float = 0.03f,
         @ColorInt val textColor: Int = Color.WHITE,
         @ColorInt val shadowColor: Int? = Color.BLACK,
-        val typeface: Typeface? = Typeface.DEFAULT_BOLD
+        val typeface: Typeface? = ResourcesCompat.getFont(
+            MyApplication.instance,
+            R.font.bebasneuebold
+        )
     )
 
 }
