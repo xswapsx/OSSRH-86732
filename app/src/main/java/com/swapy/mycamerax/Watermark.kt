@@ -10,34 +10,43 @@ object Watermark {
 
     fun addWatermark(
         bitmap: Bitmap,
-        watermarkText: String,
-        options: WatermarkOptions = WatermarkOptions()
+        txtDate: String, txtLat: String, txtLong: String, txtHouseId: String
     ): Bitmap {
+        val options1 = WatermarkOptions()
         val result = bitmap.copy(bitmap.config, true)
         val canvas = Canvas(result)
         val paint = Paint(ANTI_ALIAS_FLAG or DITHER_FLAG)
-        paint.textAlign = when (options.corner) {
+        paint.textAlign = when (options1.corner) {
             Corner.TOP_LEFT,
             Corner.BOTTOM_LEFT -> Paint.Align.LEFT
             Corner.TOP_RIGHT,
             Corner.BOTTOM_RIGHT -> Paint.Align.RIGHT
         }
-        val textSize = result.width * options.textSizeToWidthRatio
+        val textSize = result.width * options1.textSizeToWidthRatio
         paint.textSize = textSize
-        paint.color = options.textColor
-        if (options.shadowColor != null) {
-            paint.setShadowLayer(textSize / 2, 0f, 0f, options.shadowColor)
+        paint.color = options1.textColor
+        if (options1.shadowColor != null) {
+            paint.setShadowLayer(textSize / 2, 0f, 0f, options1.shadowColor)
         }
-        if (options.typeface != null) {
-            paint.typeface = options.typeface
+        if (options1.typeface != null) {
+            paint.typeface = options1.typeface
         }
-        val padding = result.width * options.paddingToWidthRatio
+        val padding = result.width * options1.paddingToWidthRatio
         val coordinates =
-            calculateCoordinates(watermarkText, paint, options, canvas.width, canvas.height, padding)
-        canvas.drawText(watermarkText, coordinates.x, coordinates.y, paint)
+            calculateCoordinates(
+                txtDate,
+                paint,
+                options1,
+                canvas.width,
+                canvas.height,
+                padding
+            )
+        canvas.drawText(txtDate, coordinates.x, coordinates.y, paint)     //date
+        canvas.drawText("LONG: $txtLong", coordinates.x, coordinates.y - 25, paint)       //long
+        canvas.drawText("LAT: $txtLat", coordinates.x, coordinates.y - 50, paint)    //lat
+        canvas.drawText("ID: $txtHouseId", coordinates.x, coordinates.y - 75, paint)      //houseId
         return result
     }
-
 
     private fun calculateCoordinates(
         watermarkText: String,
@@ -87,7 +96,7 @@ object Watermark {
         val paddingToWidthRatio: Float = 0.03f,
         @ColorInt val textColor: Int = Color.WHITE,
         @ColorInt val shadowColor: Int? = Color.BLACK,
-        val typeface: Typeface? = null
+        val typeface: Typeface? = Typeface.DEFAULT_BOLD
     )
 
 }

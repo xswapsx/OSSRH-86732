@@ -32,8 +32,13 @@ class MainActivity : AppCompatActivity() {
                 toast("Path: ${result.data?.getStringExtra(IMAGE_PATH)}")
 
                 val bitmap = BitmapFactory.decodeFile(filePath)
-                val options = Watermark.WatermarkOptions()
-                val newBitmap = addWatermark(bitmap, "@Swapnil", options)
+                Watermark.WatermarkOptions()
+                val newBitmap = addWatermark(
+                    bitmap, "06-12-2022 04:32 PM",
+                    "20.1034293",
+                    "78.8089191",
+                    "HPSBA1002"
+                )
                 binding.imgView.setImageBitmap(newBitmap)
                 deleteTheFile(filePath)
             }
