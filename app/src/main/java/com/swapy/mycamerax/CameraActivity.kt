@@ -19,11 +19,11 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.google.common.util.concurrent.ListenableFuture
 import com.swapy.imagecompressor.ImageCompressor
+import com.swapy.mycamerax.Utils.FILENAME_FORMAT
 import com.swapy.mycamerax.Utils.IMAGE_PATH
+import com.swapy.mycamerax.Utils.getDateTime
 import com.swapy.mycamerax.databinding.ActivityCameraBinding
 import java.io.File
-import java.text.SimpleDateFormat
-import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -63,10 +63,7 @@ class CameraActivity : AppCompatActivity() {
 
     private fun takePhoto() {
         imageCapture?.let {
-            val fileName = SimpleDateFormat(
-                FILENAME_FORMAT,
-                Locale.US
-            ).format(System.currentTimeMillis()) + ".jpeg"
+            val fileName = getDateTime(FILENAME_FORMAT) + ".jpeg"
             val file = File(externalMediaDirs[0], fileName)
             val outputFileOptions = ImageCapture.OutputFileOptions.Builder(file).build()
             it.takePicture(
@@ -134,7 +131,6 @@ class CameraActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "MainActivity"
-        private const val FILENAME_FORMAT = "yyyy-MM-dd'T'HHmmssSSS"
         private const val ID = "id"
 
 

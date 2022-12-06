@@ -10,7 +10,8 @@ import java.util.*
 object Utils {
     private const val TAG = "Utils"
     const val IMAGE_PATH = "imgPath"
-    private const val SIMPLE_DATE_FORMAT = "dd-MM-yyyy hh:mm aa"
+    const val SIMPLE_DATE_FORMAT = "dd-MM-yyyy hh:mm aa"
+    const val FILENAME_FORMAT = "yyyy-MM-dd'T'HHmmssSSS"
 
     fun Context?.toast(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
@@ -28,9 +29,9 @@ object Utils {
         }
     }
 
-    fun getCurrentTimeStamp(): String {
+    fun getDateTime(dFormat: String): String {
         return SimpleDateFormat(
-            SIMPLE_DATE_FORMAT,
+            dFormat,
             Locale.US
         ).format(System.currentTimeMillis())
     }
