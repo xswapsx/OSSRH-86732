@@ -7,6 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.swapy.mycamerax.Utils.IMAGE_PATH
 import com.swapy.mycamerax.Utils.deleteTheFile
+import com.swapy.mycamerax.Utils.getCurrentTimeStamp
 import com.swapy.mycamerax.Utils.toast
 import com.swapy.mycamerax.Watermark.addWatermark
 import com.swapy.mycamerax.databinding.ActivityMainBinding
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
                 val bitmap = BitmapFactory.decodeFile(filePath)
                 Watermark.WatermarkOptions()
                 val newBitmap = addWatermark(
-                    bitmap, "06-12-2022 04:32 PM",
+                    bitmap, getCurrentTimeStamp(),
                     "20.1034293",
                     "78.8089191",
                     "HPSBA1002"

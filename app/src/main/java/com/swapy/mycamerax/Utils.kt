@@ -1,14 +1,17 @@
 package com.swapy.mycamerax
 
-import android.app.Application
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 object Utils {
-    const val IMAGE_PATH = "imgPath"
     private const val TAG = "Utils"
+    const val IMAGE_PATH = "imgPath"
+    private const val SIMPLE_DATE_FORMAT = "dd-MM-yyyy HH:mm aa"
+
     fun Context?.toast(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
@@ -23,6 +26,13 @@ object Utils {
             }
 
         }
+    }
+
+    fun getCurrentTimeStamp(): String {
+        return SimpleDateFormat(
+            SIMPLE_DATE_FORMAT,
+            Locale.US
+        ).format(System.currentTimeMillis())
     }
 
 }
