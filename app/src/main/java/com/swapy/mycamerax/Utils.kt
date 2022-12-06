@@ -8,7 +8,6 @@ import java.io.File
 
 object Utils {
     const val IMAGE_PATH = "imgPath"
-    private val applicationContext = Application()
     private const val TAG = "Utils"
     fun Context?.toast(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
