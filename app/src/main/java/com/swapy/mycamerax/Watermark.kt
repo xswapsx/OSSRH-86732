@@ -12,31 +12,31 @@ object Watermark {
         bitmap: Bitmap,
         txtDate: String, txtLat: String, txtLong: String, txtHouseId: String
     ): Bitmap {
-        val options1 = WatermarkOptions()
+        val options = WatermarkOptions()
         val result = bitmap.copy(bitmap.config, true)
         val canvas = Canvas(result)
         val paint = Paint(ANTI_ALIAS_FLAG or DITHER_FLAG)
-        paint.textAlign = when (options1.corner) {
+        paint.textAlign = when (options.corner) {
             Corner.TOP_LEFT,
             Corner.BOTTOM_LEFT -> Paint.Align.LEFT
             Corner.TOP_RIGHT,
             Corner.BOTTOM_RIGHT -> Paint.Align.RIGHT
         }
-        val textSize = result.width * options1.textSizeToWidthRatio
+        val textSize = result.width * options.textSizeToWidthRatio
         paint.textSize = textSize
-        paint.color = options1.textColor
-        if (options1.shadowColor != null) {
-            paint.setShadowLayer(textSize / 2, 0f, 0f, options1.shadowColor)
+        paint.color = options.textColor
+        if (options.shadowColor != null) {
+            paint.setShadowLayer(textSize / 2, 0f, 0f, options.shadowColor)
         }
-        if (options1.typeface != null) {
-            paint.typeface = options1.typeface
+        if (options.typeface != null) {
+            paint.typeface = options.typeface
         }
-        val padding = result.width * options1.paddingToWidthRatio
+        val padding = result.width * options.paddingToWidthRatio
         val coordinates =
             calculateCoordinates(
                 txtDate,
                 paint,
-                options1,
+                options,
                 canvas.width,
                 canvas.height,
                 padding
