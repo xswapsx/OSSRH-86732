@@ -10,12 +10,13 @@
         android:layout_height="match_parent"
         android:id="@+id/preview"/>
     <ImageButton
+        android:contentDescription="@string/shutter_button_desc"
         android:id="@+id/img_capture_btn"
         android:layout_width="92sp"
         android:layout_height="92sp"
         android:background="@drawable/ic_shutter"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_camera"
+        android:src="@drawable/ic_camera_48"
         android:text="@string/take_a_photo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

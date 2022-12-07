@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MyCameraX</string>
     <string name="take_a_photo">Take a photo</string>
+    <string name="shutter_button_desc">shutter button</string>
 </resources>
